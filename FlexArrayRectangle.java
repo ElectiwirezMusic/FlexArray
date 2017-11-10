@@ -2,7 +2,7 @@ public class FlexArrayRectangle {
 	
 	private int mySize;
 	
-	private Rectangle [] myArray;
+	private Rectangle[] myArray;
 	
 	// constructors are missing
 	// array is not initialized
@@ -11,7 +11,7 @@ public class FlexArrayRectangle {
 		mySize = 0;
 	}
 	public FlexArrayRectangle(int myArraySize){
-		myArray = new Rectangle [myArraySize];
+		myArray = new Rectangle[myArraySize];
 		mySize = 0;
 	}
 	
@@ -28,20 +28,17 @@ public class FlexArrayRectangle {
 
 	public void append(Rectangle data){
 		
-		if(mySize >= myArray.length ){
-			//System.out.println(this);
+		if(mySize >= myArray.length )
 			resize();
-			//System.out.println(this);
-		}
-		
 		myArray[mySize] = data;
 		mySize++;
 	}
 	
 	public void insert(int index, Rectangle data){
-		if(index>= mySize)
+		if(index>= mySize){
 			append(data);
-		
+			return;
+		}
 		moveElementsFORWARD(index);
 		myArray[index] = data;
 		
@@ -53,7 +50,6 @@ public class FlexArrayRectangle {
 		mySize++;
 	}
 	
-	// [1][2][3][<>][]
 	public int discard(int index){
 		if(index >= mySize)
 			return -999;
@@ -62,36 +58,33 @@ public class FlexArrayRectangle {
 		
 	}
 	private void moveElementsBACKWARDS(int index){
-		// start at the location and go till end of valid data and move the elements
-		for(int i = index; i < (mySize-1) ; i++ )
-			myArray[i] = myArray[i+1];
+		for(int i = index; i <= 0; i-- )
+			myArray[i-1] = myArray[i];
 		mySize--;
 	}
 	
 	public String toString(){
-		String str = "";
-		for(Rectangle i : myArray) {
-			str += " " ;
-			str += String.valueOf( i );
+		StringBuilder sb = new StringBuilder() ;
+		
+		for(int i = 0; i < mySize; i++){
+			sb.append(myArray[i].toString());
+			if(i < mySize -1)
+				sb.append("\n");
 		}
-		return str;
+		return "[" + sb.toString() + "]";
 		
 	}
 	private void resize(){
-		Rectangle [] intArr = new Rectangle [myArray.length + 1];
-		
-		int j = 0 ;
-		for(Rectangle i : myArray)
-			intArr[j++] = i ;
-		myArray = intArr;
+		resize(5);
 	}
 	
 	private void resize(int grownAmount){
-		Rectangle [] intArr = new Rectangle [myArray.length + grownAmount];
+		Rectangle [] rectArr = new Rectangle [myArray.length + grownAmount];
 		
 		int j = 0 ;
 		for(Rectangle i : myArray)
-			intArr[j++] = i ;
-		myArray = intArr;
+			rectArr[j++] = i ;
+		myArray = rectArr;
 	}
+
 }
