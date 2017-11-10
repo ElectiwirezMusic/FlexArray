@@ -70,7 +70,7 @@ public class FlexArrayPrimitive {
 	
 	public String toString(){
 		String str = "";
-		for(int i : myArray) {
+		for(int i = 0; i < mySize; i++; ) {
 			str += " " ;
 			str += String.valueOf( i );
 		}
