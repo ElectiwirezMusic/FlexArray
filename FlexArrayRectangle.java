@@ -26,7 +26,7 @@ public class FlexArrayRectangle {
 		return false;
 	}
 
-	public void append(int data){
+	public void append(Rectangle data){
 		
 		if(mySize >= myArray.length ){
 			//System.out.println(this);
@@ -78,16 +78,16 @@ public class FlexArrayRectangle {
 		
 	}
 	private void resize(){
-		int [] intArr = new int [myArray.length + 1];
+		Rectangle [] intArr = new Rectangle [myArray.length + 1];
 		
 		int j = 0 ;
-		for(int i : myArray)
+		for(Rectangle i : myArray)
 			intArr[j++] = i ;
 		myArray = intArr;
 	}
 	
 	private void resize(int grownAmount){
-		int [] intArr = new int [myArray.length + grownAmount];
+		Rectangle [] intArr = new Rectangle [myArray.length + grownAmount];
 		
 		int j = 0 ;
 		for(Rectangle i : myArray)
