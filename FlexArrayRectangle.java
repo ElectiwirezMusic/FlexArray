@@ -35,6 +35,8 @@ public class FlexArrayRectangle {
 	}
 	
 	public void insert(int index, Rectangle data){
+		if(index < 0)
+			return;
 		if(index>= mySize){
 			append(data);
 			return;
@@ -51,6 +53,8 @@ public class FlexArrayRectangle {
 	}
 	
 	public int discard(int index){
+		if(index < 0)
+			return -999;
 		if(index >= mySize)
 			return -999;
 		moveElementsBACKWARDS(index);
