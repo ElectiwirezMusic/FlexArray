@@ -28,20 +28,19 @@ public class FlexArrayPrimitive {
 
 	public void append(int data){
 		
-		if(mySize >= myArray.length ){
-			System.out.println(this);
+		if(mySize >= myArray.length )
 			resize();
-			System.out.println(this);
-		}
-		
 		myArray[mySize] = data;
 		mySize++;
 	}
 	
 	public void insert(int index, int data){
-		if(index>= mySize)
+		if(index < 0)
+			return;
+		if(index>= mySize){
 			append(data);
-		
+			return;
+		}
 		moveElementsFORWARD(index);
 		myArray[index] = data;
 		
@@ -55,10 +54,12 @@ public class FlexArrayPrimitive {
 	
 	// [1][2][3][<>][]
 	public int discard(int index){
+		if(index < 0)
+			return -999;
 		if(index >= mySize)
 			return -999;
 		moveElementsBACKWARDS(index);
-		return index;
+		return myArray[index];
 		
 	}
 	private void moveElementsBACKWARDS(int index){
@@ -70,20 +71,16 @@ public class FlexArrayPrimitive {
 	
 	public String toString(){
 		String str = "";
-		for(int i = 0; i < mySize; i++; ) {
-			str += " " ;
-			str += String.valueOf( i );
+		for(int i = 0; i < mySize; i++) {
+			if(i > 0)
+				str += ", " ;
+			str += String.valueOf(myArray[i]);
 		}
-		return str;
+		return "[" + str + "]";
 		
 	}
 	private void resize(){
-		int [] intArr = new int [myArray.length + 1];
-		
-		int j = 0 ;
-		for(int i : myArray)
-			intArr[j++] = i ;
-		myArray = intArr;
+		resize(5);
 	}
 	
 	private void resize(int grownAmount){
