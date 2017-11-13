@@ -78,7 +78,7 @@ public class FlexArrayRectangle {
 			if(i < mySize -1)
 				sb.append("\n");
 		}
-		return "[" + sb.toString() + "]";
+		return "[" + sb.toString() + "]" + "\n" ;
 		
 	}
 	//resizes the array using the other resize method
