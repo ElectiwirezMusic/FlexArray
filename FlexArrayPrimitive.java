@@ -2,21 +2,22 @@
 //
 //Period: 2
 //
-//Class Description: implements different methods which manipulates an array of integers.
-public class FlexArrayPrimitive {
+//Class Description: implements different methods which manipulates an array of rectangles.
+public class FlexArrayRectangle {
 	
 	//declaring private data members
 	private int mySize;
-	private int [] myArray;
+	
+	private Rectangle[] myArray;
 	
 	//defualt constructor
-	public FlexArrayPrimitive(){
-		myArray = new int[20];
+	public FlexArrayRectangle(){
+		myArray = new Rectangle[20];
 		mySize = 0;
 	}
 	//accepts a size for an array (contructor)
-	public FlexArrayPrimitive(int myArraySize){
-		myArray = new int[myArraySize];
+	public FlexArrayRectangle(int myArraySize){
+		myArray = new Rectangle[myArraySize];
 		mySize = 0;
 	}
 	//returns the logical length of the array
@@ -31,7 +32,7 @@ public class FlexArrayPrimitive {
 		return false;
 	}
 	//adds data to the end of the array
-	public void append(int data){
+	public void append(Rectangle data){
 		
 		if(mySize >= myArray.length )
 			resize();
@@ -39,9 +40,7 @@ public class FlexArrayPrimitive {
 		mySize++;
 	}
 	//inserts data at the the specified index
-	public void insert(int index, int data){
-		if(index < 0)
-			return;
+	public void insert(int index, Rectangle data){
 		if(index>= mySize){
 			append(data);
 			return;
@@ -56,51 +55,44 @@ public class FlexArrayPrimitive {
 			myArray[i+1] = myArray[i];
 		mySize++;
 	}
-	
 	//removes the element at the specified index
-	public int discard(int index){
-		if(index < 0)
-			return -999;
+	public Rectangle discard(int index){
 		if(index >= mySize)
-			return -999;
+			return null;
 		moveElementsBACKWARDS(index);
 		return myArray[index];
 		
 	}
 	//moves elements backwards so the order can be kept in discard method
 	private void moveElementsBACKWARDS(int index){
-		// start at the location and go till end of valid data and move the elements
 		for(int i = index; i < (mySize-1) ; i++ )
 			myArray[i] = myArray[i+1];
 		mySize--;
 	}
 	//converts the array into a string that can be outputted to the monitor
 	public String toString(){
-		String str = "";
-		for(int i = 0; i < mySize; i++) {
-			if(i > 0)
-				str += ", " ;
-			str += String.valueOf(myArray[i]);
+		StringBuilder sb = new StringBuilder() ;
+		
+		for(int i = 0; i < mySize; i++){
+			sb.append(myArray[i].toString());
+			if(i < mySize -1)
+				sb.append("\n");
 		}
-		return "[" + str + "]";
+		return "[" + sb.toString() + "]" + "\n" ;
 		
 	}
-	
-	//resizes the array one element a time
+	//resizes the array using the other resize method
 	private void resize(){
 		resize(5);
 	}
-	
-	//resizes the array in steps of 
+	//resizes the array to accommodate for more values
 	private void resize(int grownAmount){
-		int [] intArr = new int [myArray.length + grownAmount];
+		Rectangle [] rectArr = new Rectangle [myArray.length + grownAmount];
 		
-		// copy existing elements to the new Array
 		int j = 0 ;
-		for(int i : myArray)
-			intArr[j++] = i ;
-		
-		// change the pointer to the new resized array
-		myArray = intArr;
+		for(Rectangle i : myArray)
+			rectArr[j++] = i ;
+		myArray = rectArr;
 	}
+
 }
