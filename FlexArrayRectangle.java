@@ -26,7 +26,6 @@ public class FlexArrayRectangle {
 	}
 	//returns true if the array is logically empty
 	public boolean isEmpty(){
-		
 		if( mySize == 0)
 			return true;
 		return false;
@@ -47,7 +46,6 @@ public class FlexArrayRectangle {
 		}
 		moveElementsFORWARD(index);
 		myArray[index] = data;
-		
 	}
 	//moves elements forward to keep the elements in order while inserting
 	private void moveElementsFORWARD(int index) {
@@ -56,17 +54,17 @@ public class FlexArrayRectangle {
 		mySize++;
 	}
 	//removes the element at the specified index
-	public int discard(int index){
+	public Rectangle discard(int index){
 		if(index >= mySize)
-			return -999;
+			return null;
 		moveElementsBACKWARDS(index);
-		return index;
+		return myArray[index];
 		
 	}
 	//moves elements backwards so the order can be kept in discard method
 	private void moveElementsBACKWARDS(int index){
-		for(int i = index; i <= 0; i-- )
-			myArray[i-1] = myArray[i];
+		for(int i = index; i < (mySize-1) ; i++ )
+			myArray[i] = myArray[i+1];
 		mySize--;
 	}
 	//converts the array into a string that can be outputted to the monitor
@@ -79,7 +77,6 @@ public class FlexArrayRectangle {
 				sb.append("\n");
 		}
 		return "[" + sb.toString() + "]" + "\n" ;
-		
 	}
 	//resizes the array using the other resize method
 	private void resize(){
@@ -94,5 +91,45 @@ public class FlexArrayRectangle {
 			rectArr[j++] = i ;
 		myArray = rectArr;
 	}
+	public void sort(){
+		//simple bubble sort 
+		int n = mySize;
+        for (int i = 0; i < n-1; i++)
+            for (int j = 0; j < n-i-1; j++)
+                if (myArray[j].compareTo(myArray[j+1]) == 1)
+                {
+                	Rectangle temp = myArray[j];
+                    myArray[j] = myArray[j+1];
+                    myArray[j+1] = temp;
+                }
+	}
+	
+	//returns value at specified index
+	public Rectangle getValue(int loc){
+		return myArray[loc];
+	}
+	
+	//using binary search to search the array for a specific  
+	public int searchFor(Rectangle target){
+		 int low = 0; 
+		 int high = mySize - 1;
+	        while (low <= high)
+	        {
+	            int mid = low + (high-low)/2;
 
+	            if (myArray[mid].equals(target))
+	                return mid;
+	            
+	            if (myArray[mid].compareTo(target) == -1)
+	                low = mid + 1;
+	            else
+	                high = mid - 1;
+	        }
+	        //if target is not found return a negative number
+	        return -1;
+	}
+	public int compareTo(Rectangle rectangle) {
+		// TODO Auto-generated method stub
+		return 0;
+	}
 }
