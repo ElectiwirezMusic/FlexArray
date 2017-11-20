@@ -91,6 +91,7 @@ public class FlexArrayPrimitive {
 		// change the pointer to the new resized array
 		myArray = intArr;
 	}
+	
 	// A FlexArrayPrimitive will be compared by the sum of its active elements.
 	// EXAMPLE:
 	// flexy1.compareTo(flexy2) returns a negative int if the sum of the elements of
@@ -113,6 +114,7 @@ public class FlexArrayPrimitive {
 			return 1;
 		return 0;
 	}
+	
 	// A FlexArray object will be considered equal to another FlexArray if the quantity of
 	// active elements are the same.
 	// EXAMPLE: flexy1.equals(flexy2) returns true if the quantity of active elements
@@ -122,9 +124,11 @@ public class FlexArrayPrimitive {
 			return true;
 		return false;
 	}
+	
+	//uses the bubble sort algorithm to sort the elements in the array
 	public void sort(){
 		//simple bubble sort 
-		int n = myArray.length;
+		int n = mySize;
         for (int i = 0; i < n-1; i++)
             for (int j = 0; j < n-i-1; j++)
                 if (myArray[j] > myArray[j+1])
@@ -134,12 +138,16 @@ public class FlexArrayPrimitive {
                     myArray[j+1] = temp;
                 }
 	}
+	
+	//returns value at specified index
 	public int getValue(int loc){
 		return myArray[loc];
 	}
+	
+	//using binary search to search the array for a specific  
 	public int searchFor(int target){
 		 int low = 0; 
-		 int high = myArray.length - 1;
+		 int high = mySize - 1;
 	        while (low <= high)
 	        {
 	            int mid = low + (high-low)/2;
@@ -152,7 +160,7 @@ public class FlexArrayPrimitive {
 	            else
 	                high = mid - 1;
 	        }
-	        //if target is not found
+	        //if target is not found return a negative number
 	        return -1;
 	}
 }
