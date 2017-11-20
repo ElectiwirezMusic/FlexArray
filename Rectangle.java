@@ -50,8 +50,28 @@ public class Rectangle
     	myLength = len;
     }  
     
+    public int getArea()
+    {
+    	return myWidth * myLength;
+    }
+    
+    //returns a String representation of the Rectangle object
     public String toString()
     {
     	return("Rectangle, width = " + myWidth + " length = " + myLength);
+    }
+    
+    // returns true if both instance variables are exactly the same
+    public boolean equals(Rectangle r)
+    {
+    	return (myLength == r.myLength && myWidth == r.myWidth);
+    }
+    
+    // returns a negative number if the area of this object is less than the object passed as an argument
+    // returns 0 if the areas are equal
+    // returns a positive number if the area of this object is greater than the object passed as an argument
+    public int compareTo(Rectangle r)
+    {
+    	return myLength * myWidth - r.myLength * r.myWidth;
     }
 }
